@@ -8,11 +8,13 @@ class Market:
         self.marketFunc = marketFunc
         self.players = []
         self.marketPrices = []  
+        self.actions = np.arange(0, 110, 10)
     
     def addPlayer(self, player):
         self.players.append(player)
     
-        
+    
+    # Should take in an action    
     def nextStep(self):
         self.time +=1
         
@@ -32,6 +34,7 @@ class Market:
                 player.sellStock()
         
         
+        # should return a next state and reward
         return self.time
     
     def getState(self):
@@ -61,7 +64,7 @@ class Player:
         self.sellPrice = 0 
         self.name = name
             
-    def buyStock(self ):
+    def buyStock(self):
         stockPrice = self.market.getBuyPrice(self.market.time)
         if(self.money >= stockPrice):
             # print(self.name , "bought stock from the market for $" , stockPrice)
