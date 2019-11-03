@@ -18,12 +18,12 @@ class Market:
     def nextStep(self):
         self.time +=1
         
-        if(self.players[0].buyPrice >= self.players[1].sellPrice):
-            self.players[0].buyOther(self.players[1] , (self.players[0].buyPrice + self.players[1].sellPrice)//2 )
+        if(self.players[0].buyPrice >= self.players[1].sellPrice and self.getBuyPrice(self.time) >= self.players[1].sellPrice):
+            self.players[0].buyOther(self.players[1] , (self.players[0].buyPrice + self.players[1].sellPrice) // 2)
            
 
-        if(self.players[1].buyPrice >= self.players[0].sellPrice):
-            self.players[1].buyOther(self.players[0] , (self.players[1].buyPrice + self.players[0].sellPrice)//2 )
+        if(self.players[1].buyPrice >= self.players[0].sellPrice and self.getBuyPrice(self.time) >= self.players[0].sellPrice):
+            self.players[1].buyOther(self.players[0] , (self.players[1].buyPrice + self.players[0].sellPrice) // 2)
            
         for player in self.players:
             if(player.buyPrice >= self.getBuyPrice(self.time)):
@@ -103,7 +103,21 @@ class Player:
     def setBuySellPrice(self , inputDict):
         self.buyPrice , self.sellPrice = self.buySellPriceFunc(inputDict)
     
-def sinFunc(t):
-    return 10 * math.sin(t/3) + 20
+def sinFunc(t, period=3):
+    return 10 * math.sin(t/period) + 20
+
+def sinFunc9(t, period=9):
+    return 10 * math.sin(t/period) + 20
+
+def sinFunc1(t, period=9):
+    return 10 * math.sin(t) + 20
+
+def increasing(t):
+    return t / 2
+
+def decreasing(t):
+    return (100 - t) / 2
+def constant(t):
+    return 25
     
     
