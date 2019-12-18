@@ -2,7 +2,7 @@ import numpy as np
 import math
 
 class Market:
-    def __init__(self , sellFactor, marketFunc ):
+    def __init__(self , sellFactor, marketFunc):
         self.sellFactor = sellFactor
         self.time = 0
         self.marketFunc = marketFunc
@@ -51,6 +51,9 @@ class Market:
     
     def getSellPrice(self, time):
         return self.getBuyPrice(time) * self.sellFactor
+    
+    def reset():
+        return Market(sellFactor, marketFunc)
     
 
 class Player:
